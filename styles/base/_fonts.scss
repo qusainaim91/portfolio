@@ -1,0 +1,35 @@
+// font-display: swap paints the fallback immediately and swaps in the real face
+// when it arrives. The default behaviour blocks for up to 3s, so a slow
+// connection gets an empty hero rather than styled text.
+
+@font-face {
+  font-family: inter-reg;
+  src: url('../fonts/Inter_18pt-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: mono-reg;
+  src: url('../fonts/JetBrainsMono-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: space-bold;
+  src: url('../fonts/SpaceGrotesk-Bold.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: space-semiBold;
+  src: url('../fonts/SpaceGrotesk-SemiBold.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+}

@@ -1,0 +1,129 @@
+/*------------------------------------*\
+#HERO	
+\*------------------------------------*/
+
+
+
+// Sits against the bottom of the hero, so the hero needs to be a positioning
+// context for it.
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: fade-in 1s ease forwards;
+  animation-delay: 1.3s;
+  cursor: pointer;
+
+  @include respond-to(mobile) {
+    bottom: 24px;
+  }
+
+  .pixel-arrow {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    animation: bounce 2s ease-in-out infinite;
+
+    span {
+      background: $green;
+      transition: background 0.3s ease;
+
+      &:nth-child(1) {
+        width: 20px;
+        height: 4px;
+      }
+
+      &:nth-child(2) {
+        width: 12px;
+        height: 4px;
+        margin: 0 auto;
+      }
+
+      &:nth-child(3) {
+        width: 4px;
+        height: 4px;
+        margin: 0 auto;
+      }
+    }
+  }
+
+  .scroll-text {
+    font-family: $mono-reg;
+    color: $muted;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: color 0.3s ease;
+    margin-top: 5px;
+  }
+
+  &:hover {
+    .pixel-arrow span {
+      background: lighten($green, 10%);
+    }
+
+    .scroll-text {
+      color: $green;
+    }
+  }
+}
+
+// Fade in animation (if not already defined)
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+// Bounce animation
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+
+
+.homepage-hero {
+  min-height: 100vh;
+  position: relative;
+  box-sizing: border-box;
+  padding: 48px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  text-align: center;
+}
+
+.px-logo-blocks { width: min(360px, 70vw); }
+
+.hero-text { display: grid; gap: 20px; justify-items: center; }
+
+/* Title */
+.intro-title {
+  font-family: $space-bold;
+  color: $green;
+}
+
+/* Description */
+.intro-sub {
+  	color: $muted;
+	max-width: 769px;
+	font-family: $inter-reg;
+  text-wrap: pretty;
+}

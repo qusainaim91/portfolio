@@ -1,0 +1,277 @@
+/*------------------------------------*\
+#PROJECT-SCREENS
+\*------------------------------------*/
+
+.project-screens {
+  margin-top: 64px;
+}
+
+
+/*------------------------------------*\
+#PROJECT-GROUP — a labelled band of screens
+\*------------------------------------*/
+
+.project-group + .project-group {
+  margin-top: 112px;
+
+  @include respond-to(tablet-s) {
+    margin-top: 88px;
+  }
+  @include respond-to(mobile) {
+    margin-top: 64px;
+  }
+}
+
+// Screens and grids stacked inside one group sit closer together than the
+// groups themselves do, so a heading reads as belonging to what follows it
+// rather than floating between two bands.
+.project-group {
+  > * + * {
+    margin-top: 24px;
+  }
+
+  > .project-group__header + * {
+    margin-top: 28px;
+  }
+}
+
+.project-group__caption {
+  font-family: $inter-reg;
+  font-size: 16px;
+  line-height: 24px;
+  color: $muted;
+  max-width: 620px;
+  margin-top: -4px;
+}
+
+
+/*------------------------------------*\
+#PROJECT-GRID — pick one per row of screens
+\*------------------------------------*/
+
+.project-grid {
+  display: grid;
+  gap: 24px;
+
+  @include respond-to(mobile) {
+    gap: 16px;
+  }
+}
+
+.project-grid--two {
+  grid-template-columns: repeat(2, 1fr);
+
+  @include respond-to(mobile) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.project-grid--three {
+  grid-template-columns: repeat(3, 1fr);
+
+  @include respond-to(tablet-s) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include respond-to(mobile) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.project-grid--split {
+  grid-template-columns: 2fr 1fr;
+  align-items: start;
+
+  @include respond-to(tablet-s) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.project-grid--phones {
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+
+  @include respond-to(tablet-s) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+/*------------------------------------*\
+#PROJECT-FIGURE — a screen plus its caption
+\*------------------------------------*/
+
+// Grid children holding a screen and a caption need to be allowed to shrink
+// below their content's intrinsic width.
+.project-figure {
+  min-width: 0;
+}
+
+.project-figure__caption {
+  font-family: $mono-reg;
+  font-size: 10px;
+  line-height: 14px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #5c5c5c;
+  margin-top: 10px;
+}
+
+
+/*------------------------------------*\
+#PROJECT-SCREEN — the frame around one image
+\*------------------------------------*/
+
+.project-screen {
+  position: relative;
+  overflow: hidden;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
+
+/*------------------------------------*\
+#PROJECT-SCREEN — full page capture
+\*------------------------------------*/
+
+// A full-page screenshot runs many times taller than it is wide, so showing it
+// whole would be thousands of pixels of scrolling. This clips it to a fixed
+// window and pans through the rest on hover.
+.project-screen--scroll {
+  height: 700px;
+  border: 1px solid rgba(255,255,255,0.10);
+
+  @include respond-to(mobile) {
+    height: 500px;
+  }
+
+  img {
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+  }
+}
+
+.project-screen--scroll {
+  // Linear, not eased: the pan is for reading, and an ease curve spends most of
+  // the duration rushing through the middle of the capture.
+  //
+  // Duration is per screen because travel depends on how tall the image is. A
+  // 7000px capture and a 1500px one cannot share a speed. Override inline:
+  //   <div class="project-screen project-screen--scroll" style="--pan: 14s">
+  --pan: 8s;
+
+  // Signals that something moves vertically here. Not pointer: nothing is
+  // clickable, and promising a click that does nothing is worse than no cue.
+  cursor: ns-resize;
+
+  img {
+    transition: object-position var(--pan) linear;
+  }
+
+  &:hover img {
+    object-position: bottom center;
+  }
+}
+
+.project-screen__hint {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  z-index: 4;
+  font-family: $mono-reg;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: $muted;
+  background: rgba(10,10,10,0.82);
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 4px 8px;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.project-screen--scroll:hover .project-screen__hint {
+  opacity: 0;
+}
+
+// Touch devices have no hover, so --scroll would be a window onto content with
+// no way to reach it. The frame drops away entirely and the capture shows at
+// full height: the page scroll does the job the pan did.
+//
+// Matches either condition: any touch device whatever its size, and any narrow
+// window whatever its pointer. 1030px is the same tablet-l boundary the rest of
+// the site turns at.
+@media (hover: none), screen and (max-width: 1030px) {
+  .project-screen--scroll {
+    height: auto;
+    cursor: auto;
+
+    img {
+      height: auto;
+      object-fit: fill;
+      object-position: initial;
+      transition: none;
+    }
+
+    .project-screen__hint {
+      display: none;
+    }
+  }
+}
+
+
+
+/*------------------------------------*\
+#PROJECT-OUTRO — how a case study ends
+\*------------------------------------*/
+
+// Deliberately undecorated: it borrows the same kicker, type and spacing as the
+// screen groups above it, so it reads as one more section of the page rather
+// than a footer bolted on. The label carrying the joke is the only thing doing
+// any work.
+.project-outro {
+  margin-top: 96px;
+
+  @include respond-to(tablet-l) {
+    margin-top: 80px;
+  }
+  @include respond-to(mobile) {
+    margin-top: 64px;
+  }
+}
+
+// The rule lives on the inner wrapper, not the section, so it starts and stops
+// with the content rather than running the full width of the viewport.
+//
+// Built from 4px squares on a 12px pitch: the same block grid the logo is drawn
+// on, rather than a generic hairline. Kept white because green is reserved for
+// signals (kickers, tags, link hovers) and spending it on a divider would stop
+// it meaning anything.
+.project-outro__inner {
+  padding-top: 56px;
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.22) 0 4px,
+    transparent 4px 12px
+  );
+  background-repeat: no-repeat;
+  background-size: 100% 4px;
+  background-position: top left;
+
+  @include respond-to(tablet-l) {
+    padding-top: 48px;
+  }
+  @include respond-to(mobile) {
+    padding-top: 40px;
+  }
+}
+
+.project-outro__note {
+  color: $white;
+  font-family: $inter-reg;
+  max-width: 620px;
+}

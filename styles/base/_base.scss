@@ -1,0 +1,50 @@
+/*------------------------------------*\
+  #BASE
+\*------------------------------------*/
+
+* {
+  box-sizing: border-box;
+	-moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+	width: 100%;
+	height: auto;
+	margin:  0 auto;
+	position: relative;
+	font-size: 62.5%;
+	line-height: 1.35em;
+	-webkit-font-smoothing: antialiased;
+  background-color: $black;
+}
+
+.home-body {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 40px 40px;
+  @include respond-to(small-screen) {
+    background-size: 36px 36px;
+  }
+  @include respond-to(mobile) {
+    background-size: 32px 32px;
+  }
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+button {
+  outline: 0;
+}
+
+input, textarea {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0;
+}

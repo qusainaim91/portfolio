@@ -1,0 +1,38 @@
+/*------------------------------------*\
+#CONTACT	
+\*------------------------------------*/
+
+// No padding-bottom: the footer's own margin sets the gap, so the homepage and
+// the case studies close on the same spacing.
+.homepage-contact {
+	padding-top: 200px;
+
+	@include respond-to(tablet-l) {
+		padding-top: 150px;
+	}
+	@include respond-to(mobile) {
+		padding-top: 120px;
+	}
+}
+ 
+
+.social-links {
+	margin-top: 48px;
+	a {
+		font-family: $mono-reg;
+		display: inline-block;
+		color: $muted;
+		cursor: pointer;
+		text-transform: uppercase;
+		transition: all 0.3s ease;
+	}
+
+	a:not(:last-child) {
+		margin-right: 24px;
+	}
+
+	a:hover {
+		color: $green;
+    transform: translateY(-4px);
+	}
+}
