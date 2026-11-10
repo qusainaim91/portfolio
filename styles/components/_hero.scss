@@ -99,6 +99,9 @@
 
 .homepage-hero {
   min-height: 100vh;
+  // On phones 100vh counts the browser bars as hidden, which pushes the scroll
+  // indicator under the bottom toolbar. svh is the height with the bars showing.
+  min-height: 100svh;
   position: relative;
   box-sizing: border-box;
   padding: 48px 24px;

@@ -462,6 +462,7 @@ input, textarea {
 }
 .homepage-hero {
   min-height: 100vh;
+  min-height: 100svh;
   position: relative;
   box-sizing: border-box;
   padding: 48px 24px;
